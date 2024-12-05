@@ -1,0 +1,23 @@
+.wrapper {
+    padding: 40px;
+    display: flex;
+    gap: 10px;
+
+}
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    box-shadow: 0 0 5px 5px red;
+}
+.box2 {
+    composes: box;
+    width: 200px;
+    color: gold;
+    height: 200px;
+    background-color: grey;
+    box-shadow: 0 0 5px 5px red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
