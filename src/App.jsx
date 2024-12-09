@@ -22,8 +22,8 @@
 
 
 // App.jsx
-import favouriteBooks from "./components/FavouriteBooks.jsx";
-import BookList from "./components/BookList.jsx";
+import favouriteBooks from "./components/BookList/FavouriteBooks.jsx";
+import BookList from "./components/BookList/BookList.jsx";
 import "./index.css";
 import "react-icons";
 
