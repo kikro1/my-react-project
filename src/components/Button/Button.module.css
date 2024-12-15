@@ -1,0 +1,357 @@
+/* .wrapper {
+    margin-top: 1000px;
+    margin-left: 100px;
+    margin-bottom: 100px;
+} */
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("https://assets.codepen.io/64/Mona-Sans.woff2")
+      format("woff2 supports variations"),
+    url("https://assets.codepen.io/64/Mona-Sans.woff2")
+      format("woff2-variations");
+  font-weight: 100 1000;
+}
+
+:root {
+  --icon-scale: 0;
+  --icon-rotation: 0;
+  --icon-opacity: 0;
+
+  --color-pale-pink: hsl(272 16% 56.99%);
+  --color-dark-purple: hsl(269.35 100% 21%);
+  --color-light-purple: hsl(269.99 100% 40%);
+  --color-bubblegum-pink: hsl(300deg 97% 68%);
+}
+
+@supports (color: color(display-p3 0 0 0)) {
+  :root {
+    --color-pale-pink: color(display-p3 0.56 0.5 0.63);
+    --color-dark-purple: color(display-p3 0.19 0.01 0.41);
+    --color-light-purple: color(display-p3 0.37 0.01 0.78);
+    --color-bubblegum-pink: color(display-p3 0.94 0.36 1);
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  outline: calc(var(--debug) * 1px) dotted
+    hsl(calc(var(--debug) * 10 * 1deg) 60% 60%);
+}
+
+html,
+body,
+main {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* body {
+  background: hsl(271deg 100% 96%);
+  font-family: "Mona Sans", sans-serif;
+} */
+
+main {
+  display: grid;
+  place-items: center;
+  
+  --color-mix: color-mix(
+        in lch,
+        var(--color-bubblegum-pink) 60%,
+        var(--color-dark-purple)
+      );
+
+  & button {
+    all: unset;
+    cursor: pointer;
+    font-size: 3em;
+    font-weight: 1000;
+    color: white;
+    position: relative;
+    transition: transform .2s ease;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      
+       background: linear-gradient(
+          to bottom right,
+          var(--color-pale-pink),
+          var(--color-pale-pink)
+        );
+      transform: scale(0.9);
+      outline: 0px solid var(--color-light-purple);
+      border-radius: 1e5px;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    span:nth-child(2) {
+      position: relative;
+      padding: 0.5em 1.2em;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      display: block;
+      border-radius: 1e5px;
+      transition: transform 0.2s ease;
+
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: var(--icon-opacity);
+        transform: scale(var(--icon-scale))
+          rotate(calc(var(--icon-rotation) * -1deg));
+        transition: transform 0.2s ease, opacity .2s ease,
+          --icon-rotation 0.4s cubic-bezier(.02,1.02,.67,1.06);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      &:before {
+        width: 2.1em;
+        top: -0.8em;
+        left: -0.8em;
+        background: url(https://assets.codepen.io/64/heart+%286%29+%281%29.png)
+          no-repeat center center / contain;
+        z-index: -1;
+         filter:  drop-shadow(0 2px 4px rgb(0 0 0 / 20%)) saturate(150%);
+      }
+
+      &:after {
+        width: 1.2em;
+        top: 1em;
+        left: 0.5em;
+        background: url(https://assets.codepen.io/64/heart+%285%29+%281%29.png)
+          no-repeat center center / contain;
+        filter: blur(2px) drop-shadow(0 2px 4px rgb(0 0 0 / 20%)) saturate(150%);
+      }
+    }
+    
+   
+    span:nth-child(1) {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: transparent;
+
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: 5;
+        transform: scale(var(--icon-scale))
+          rotate(calc(var(--icon-rotation) * -1deg));
+        transition: transform 0.2s ease, opacity .2s ease,
+          --icon-rotation 0.4s cubic-bezier(.02,1.02,.67,1.06);
+        pointer-events: none;
+       
+      }
+
+      &:before {
+        width: 1.75em;
+        top: -1em;
+        right: 0.5em;
+        background: url(https://assets.codepen.io/64/heart+%283%29+%281%29.png)
+          no-repeat center center / contain;
+        filter: blur(1px) drop-shadow(0 2px 4px rgb(0 0 0 / 20%)) saturate(150%);
+      }
+
+      &:after {
+        width: 2em;
+        top: 1em;
+        right: -0.5em;
+        background: url(https://assets.codepen.io/64/heart+%284%29+%281%29.png)
+          no-repeat center center / contain;
+         filter:  drop-shadow(0 2px 4px rgb(0 0 0 / 20%)) saturate(150%);
+      }
+    }
+
+    &:hover {
+      --icon-scale: 1;
+      --icon-rotation: 0;
+      --icon-opacity: 1;
+      
+
+      &:before {
+        transform: scale(1.05);
+        background: linear-gradient(
+          to bottom right,
+          var(--color-dark-purple),
+          var(--color-light-purple)
+        );
+        box-shadow: 0 4px 22px -8px var(--color-mix);
+      }
+
+      & > span:nth-child(2) {
+        transform: scale(0.95);
+      }
+      
+      &:active {
+        --icon-scale: 0.8;
+        --icon-rotation: 20;
+
+        transform: scale(1.05);
+
+        &:before {
+          box-shadow: 0 2px 12px var(--color-mix);
+        }
+
+        span:before,
+        span:after {
+          transition-delay: 0s;
+        }
+
+        span:nth-child(odd):before,
+        span:nth-child(even):before {
+          --icon-rotation: -20;
+        }
+
+        span:nth-child(odd):after,
+        span:nth-child(even):after {
+          --icon-rotation: 20;
+        }
+
+        &:before {
+          transform: scale(0.95);
+        }
+      }
+    }
+  }
+}
+
+
+/* 
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  height: 0;
+  text-align: center;
+}
+
+button {
+  position: relative;
+  margin: 50px;
+  width: 400px;
+  height: 100px;
+  background: transparent;
+  border: 5px solid #000000;
+  border-radius: 60px;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Calistoga', cursive;
+  font-size: 1.5em;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+button::before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100px;
+  background-image: linear-gradient(
+    45deg,
+    #ff75fd 11.36%,
+    #000000 11.36%,
+    #000000 12.5%,
+    #ff0303 12.5%,
+    #ff0303 23.86%,
+    #000000 23.86%,
+    #000000 25%,
+    #ffb300 25%,
+    #ffb300 36.36%,
+    #000000 36.36%,
+    #000000 37.5%,
+    #ffee00 37.5%,
+    #ffee00 48.86%,
+    #000000 48.86%,
+    #000000 50%,
+    #00ffdd 50%,
+    #00ffdd 61.36%,
+    #000000 61.36%,
+    #000000 62.5%,
+    #0346ff 62.5%,
+    #0346ff 73.86%,
+    #000000 73.86%,
+    #000000 75%,
+    #bf00ff 75%,
+    #bf00ff 86.36%,
+    #000000 86.36%,
+    #000000 87.5%,
+  );
+  background-size: 200px 200px;
+  animation: barberpole 10s linear infinite;
+  z-index: -1;
+}
+
+button::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 50px;  
+  background: #000000;
+  border: 5px solid #000;
+  border-radius: 100px;
+  box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+  z-index: -1;
+}
+
+button:hover {
+  color: #000;
+}
+
+button:hover::after {
+  background: #fff;
+}
+
+button:active {
+  color: #fff;
+}
+
+button:active::before {
+  animation-play-state: paused;
+}
+
+button:active::after {
+  background: #000;
+}
+
+
+@keyframes barberpole {
+  100% {
+    background-position: 50% 50%;
+  }
+} */
